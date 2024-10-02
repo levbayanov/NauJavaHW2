@@ -21,11 +21,7 @@ public class PortScanning implements Task {
     public void start() {
         scanning = true;
         scanningThread = new Thread(() -> {
-        while (scanning) {
-            for (int port = startPort; port <= endPort; port++) {
-                if (!scanning) {
-                    break;
-                }
+            for (int port = startPort; port <= endPort && scanning; port++) {
                 try  {
                     Socket socket = new Socket(host, port);
                     System.out.println("Порт " + port + " открыт");
@@ -33,7 +29,6 @@ public class PortScanning implements Task {
                     //Если порт закрыт
                 }
             }
-        }
             System.out.println("Сканирование завершено.");
         });
 
@@ -43,5 +38,13 @@ public class PortScanning implements Task {
     @Override
     public void stop() {
         scanning = false;
+        if (scanningThread!= null) {
+            scanningThread.interrupt();
+            try {
+                scanningThread.join();
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }
     }
 }

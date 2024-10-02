@@ -5,9 +5,9 @@ public class SumArray {
     public static int sumPositive(int[] arr)
     {
         int posNum = 0;
-        for (int i : arr) {
-            if (i >= 0) {
-                posNum += i;
+        for (int e : arr) {
+            if (e >= 0) {
+                posNum += e;
             }
         }
         return posNum;

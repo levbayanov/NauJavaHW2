@@ -24,7 +24,7 @@ public class HttpClient {
             System.out.println("Response Code : " + responseCode);
 
             BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            String inputLine = "";
+            String inputLine;
             StringBuilder response = new StringBuilder();
 
             while ((inputLine = in.readLine()) != null) {
